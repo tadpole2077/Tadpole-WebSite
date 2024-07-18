@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "resolveJsonModule": true,              /* used to import JSON files */
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "outDir": "./dist/out-tsc",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "web3": [ "node_modules/web3" ],
+      "crypto": [ "node_modules/crypto-js" ],
+      "tronweb": ["node_modules/tronweb"]
+    }
+  },
+  "angularCompilerOptions": {
+    /*"allowSyntheticDefaultImports": true,
+    "esModuleInterop": true*/
+    "strictInjectionParameters": true,  // taken from test vs2022 template - not set before
+    //"strictInputAccessModifiers": true, // taken from test vs2022 template - not set before
+    //"strictTemplates": true             // taken from test vs2022 template - not set before
+  }
+}

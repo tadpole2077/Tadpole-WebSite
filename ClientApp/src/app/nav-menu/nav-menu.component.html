@@ -1,0 +1,33 @@
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow mb-3"
+       [ngClass]="{ 'navbar-light':!application.dark_mode, 'bg-white':!application.dark_mode, 'navbar-dark':application.dark_mode, 'bg-dark':application.dark_mode}">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']"></a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="appButtons">        
+      </div>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link lineAnim" [ngClass]="{ 'text-dark':!application.dark_mode, 'text-light':application.dark_mode}" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link lineAnim" [ngClass]="{ 'text-dark':!application.dark_mode, 'text-light':application.dark_mode}" [routerLink]="['/', 'info']">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+

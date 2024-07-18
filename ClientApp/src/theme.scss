@@ -1,0 +1,603 @@
+
+@use '@angular/material' as mat;
+@use 'scss/palette_helper' as palette-helper;
+@use "scss/mode_mixin.scss" as mode;
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+// (v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+//@include mat.all-legacy-component-typographies();
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
+// Available color palettes: https://material.io/design/color/
+$light-app-primary: mat.define-palette(mat.$blue-palette,800);
+$light-app-accent: mat.define-palette(mat.$blue-palette);
+$light-app-warn: mat.define-palette(mat.$red-palette);
+$light-typography: mat.define-typography-config();
+
+
+// Create the theme object (a Sass map containing all of the palettes).
+// Angular 15 - Material theme requires typography(font related styles)
+$light-app-theme: mat.define-light-theme((
+    color: (
+      primary: $light-app-primary,
+      accent: $light-app-accent,
+      warn: $light-app-warn,
+    ),
+    typography: $light-typography,
+    density: 0,
+    ));
+
+// Additional theme styling used for table and light.
+//      secondary-text >> color >> para2 >> used: header font color
+$light-app-theme: palette-helper.mat-set-custom-table($light-app-theme, #343a40);
+
+
+// Emit theme-dependent styles for common features used across multiple components.  TEMP - remove when full upgrade to V3 Material components completed
+//@include mat.all-legacy-component-themes($light-app-theme);
+//@include mat.all-component-typographies($light-app-theme);
+
+@include mat.typography-hierarchy($light-typography);
+@include mat.core-theme($light-app-theme);
+@include mat.all-component-themes($light-app-theme);
+
+
+// Home Page & Links
+$app-button-bg: rgba(196, 198, 209, 0.2);
+$app-button-color: mat.get-color-from-palette($light-app-primary);
+$app-link-color: mat.get-color-from-palette($light-app-primary);
+
+@include mode.home($app-button-bg, $app-button-color, $app-button-color);
+@include mode.link($app-link-color, #000, mat.get-color-from-palette($light-app-primary));
+
+// Icons
+$money-light: #85bb65;
+
+// highlight button color
+$light-button-active-glow: mat.get-color-from-palette(mat.define-palette(mat.$blue-palette,600));
+
+// Dropdown Menu
+$light-menu-hover-bg: #f5f5f5;
+
+// Table Row
+$app-row-hover: rgba(173, 245, 230, .2);
+
+
+
+
+// *****************************************************************************************************
+// Apply the dark theme only when the `.darkMode` CSS class is applied
+// to an ancestor element of the components (such as `body`).
+$dark-app-primary: mat.define-palette(mat.$blue-palette,800);
+$dark-app-accent: mat.define-palette(mat.$blue-gray-palette);
+$dark-app-warn: mat.define-palette(mat.$red-palette);
+
+$dark-app-button-palette: mat.define-palette(mat.$blue-palette,400);
+$dark-app-button-bg: rgba(196, 198, 209, 0.2);
+$app-button-hover-bg: $app-button-color;
+$dark-menu-bg: #303339;
+$dark-menu-hover-bg: #3b3f46;
+$dark-app-button-color: mat.get-color-from-palette($dark-app-button-palette);
+$dark-outer-bg: #212936;
+$dark-inner-bg: #1A1C27;
+
+// Create the theme object (a Sass map containing all of the palettes).
+$dark-app-theme: mat.define-dark-theme(( color: ( primary: $dark-app-primary, accent: $dark-app-accent, warn: $dark-app-warn ), typography: mat.define-typography-config(), density: 0, ));
+
+// Also using .mat-app-background class on the root.body tag as not encapsulated within a materials object.
+// mat-set-background, replaces color.background and background with passed color (para#2), returning an updated theme.
+// This theme is then assigned during dark mode.
+//  Additional theme properties set via custom mixin call mat-set-background:
+//    card >> color >> [para3] $dark-inner-bg >> used for table background color
+//    raised-button >> color >> [para2] $dark-outer-bg >> used when button selected
+//
+//  Suggest using browser debug to find the actual theme property used by the component for new color mapping - if not pulling from standard set.
+//
+$dark-app-theme: palette-helper.mat-set-background($dark-app-theme, $dark-outer-bg, $dark-inner-bg);
+$foreground: map-get($dark-app-theme, foreground);
+
+
+.darkMode {
+  // Emit theme-dependent styles for common features used across multiple components.
+  // Use the `-color` mixins to only apply color styles without reapplying the same typography and density styles.
+  // Not using dark mode on all Material components - some use same as light mode.
+  // List : material/core/theming/_all-theme.scss
+  @include mat.core-color($dark-app-theme);
+  @include mat.table-color($dark-app-theme);
+  @include mat.sort-color($dark-app-theme);
+  @include mat.paginator-color($dark-app-theme);
+  @include mat.form-field-color($dark-app-theme);
+  @include mat.input-color($dark-app-theme);
+  @include mat.checkbox-color($dark-app-theme);
+  @include mat.autocomplete-color($dark-app-theme);
+  @include mat.expansion-color($dark-app-theme);
+  @include mat.badge-color($dark-app-theme);
+  @include mat.bottom-sheet-color($dark-app-theme);
+  @include mat.button-toggle-color($dark-app-theme);
+  @include mat.dialog-color($dark-app-theme);
+  @include mat.progress-bar-color($dark-app-theme);
+  //@include mat.button-color($light-theme);
+  //@include mat.all-legacy-component-themes($dark-app-theme);
+  /*@include mat.all-component-themes($dark-app-theme15);*/
+  @include mode.home($dark-app-button-bg, $app-button-hover-bg, $dark-app-button-color);
+  @include mode.link($dark-app-button-color, #FFF, #FFF);
+
+  // dropdown-menu - Alert component
+  .dropdown-menu {
+    background-color: $dark-menu-bg;
+  }
+
+  .menuItem:hover {
+    background-color: $dark-menu-hover-bg /*6% lighter then #303339*/
+  }
+
+  .gradientBar {
+    background: linear-gradient(270deg, rgb(21, 101, 192) 0%, rgba(140, 180, 224, 0.7) 28%, rgba(227, 237, 247, 0.24) 42%, rgba(26, 28, 39, 0) 100%);
+  }
+  // Mat-Tab
+  .mat-mdc-tab .mdc-tab__text-label {
+    color: white;
+  }
+
+  .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    color: $dark-app-button-color;
+  }
+
+  .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    border-color: $dark-app-button-color;
+  }
+  // Mat-Datatable
+  // Table Search field
+  .tableFilter .material-icons.mdc-text-field__icon {
+    color: rgba(255, 255, 255, 0.6)
+  }
+
+  .tableFilter .mdc-floating-label--float-above .material-icons {
+    color: $app-link-color
+  }
+  // Paginator
+  .mat-mdc-paginator-container {
+    background-color: $dark-inner-bg
+  }
+
+  div.barContainer {
+    background-color: inherit;
+    margin-top: -8px;
+  }
+
+
+  div.promptLink {
+    border-color: #1b6ec2;
+    border-style: solid;
+  }
+
+  .modalFrame {
+    color: var(--bs-gray-300);
+  }
+  // Number shadow
+  span.buildingNum, span.dayExpiry, span.staminaLow {
+    text-shadow: none;
+  }
+  //inner container
+  .container {
+    background-color: $dark-inner-bg;
+    border-radius: 10px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: -0.5rem;
+    min-height: 12rem;
+  }
+
+  header .container {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    min-height: auto;
+    padding-right: 0;
+  }
+
+  .avatarLink {
+    --alpha: .12;
+    --rgb: 255, 255, 255;
+  }
+
+  .districtNum {
+    color: $dark-app-button-color
+  }
+
+  .districtSell, a.showAllLink i.fa-times, .warnData {
+    color: orangered
+  }
+
+  div.typeFilter {
+    border-color: darkslategray;
+    margin-right: -82px;
+  }
+
+  .typeFilter div {
+    background-color: $dark-inner-bg;
+  }
+
+  .typeFilter div.activeFilter, .typeFilter div:hover {
+    background-color: $dark-outer-bg;
+  }
+
+  .mysteryImg {
+    background-color: wheat;
+    border-radius: 50%;
+  }
+
+  .avatarLink:hover .ownerImg {
+    background: #f8f2e4;
+  }
+
+  .avatarLink:hover img.mysteryDark {
+    background-color: white;
+  }
+  // Bell and shake effect
+  .alertBell a span:hover {
+    color: white
+  }
+
+  .shake1:before, .shake2:before, .shake1:after, .shake2:after {
+    border: 0 solid transparent;
+    border-top: 2px solid lightgray;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) > * {
+    color: white;
+  }
+
+  .toRent, .salepos {
+    color: black;
+  }
+
+  div.modalFrame {
+    background-color: $dark-outer-bg;
+    overflow: hidden;
+  }
+
+  .mat-paginator-container {
+    background-color: $dark-inner-bg;
+  }
+
+  a.closeframe {
+    color: white;
+  }
+
+  .mat-expansion-panel-header, .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-content {
+    background-color: $dark-outer-bg;
+  }
+  // District Summary
+  #taxChangeAccordion .mat-expansion-panel, #taxChangeAccordion .mat-expansion-panel-body {
+    background-color: $dark-inner-bg;
+  }
+
+  .adframe {
+    color: white;
+  }
+
+  div.buildingZoom, div.buildingInfo {
+    color: white;
+  }
+
+  div.buildingZoom, div.buildingInfo {
+    background-color: $dark-inner-bg;
+  }
+  // Production History
+  span.summaryLabel, .helpTip span, .helpTipNoIcon span {
+    color: var(--bs-gray-500);
+  }
+
+  div.predictionDetailInner {
+    background-color: $dark-inner-bg;
+    color: var(--bs-gray-200);
+  }
+
+  .predictionDetailInner div.predictionDetailCalc div > span.summarydata:nth-child(3), span.summaryWarning {
+    color: var(--bs-gray-200);
+  }
+
+  .predictionDetailInner div.predictionDetailCalc div > span.summarydata:nth-child(4) {
+    color: var(--bs-gray-500);
+  }
+
+  .table-container tr.mat-mdc-row:not(.detailRow):hover {
+    background: $dark-outer-bg;
+  }
+
+  div.predictionDetailHeader, div.totalProduce {
+    border-bottom: 1px solid white;
+  }
+
+  div.borderTop, div.totalProduce {
+    border-top: 1px solid white;
+  }
+
+  .tips {
+    margin-top: 3rem;
+  }
+
+  div.helpTip {
+    margin-top: 0;
+  }
+  //ngx-charts
+  .ngx-charts {
+
+    text {
+      fill: white;
+    }
+  }
+
+  .chart-legend .legend-label .active .legend-label-text {
+    color: white;
+  }
+
+  i.arrivalIcon {
+    animation: glowDark 1s ease-in-out infinite alternate;
+  }
+
+  i.arrivalIcon2 {
+    animation: glow2Dark 1s ease-in-out infinite alternate;
+  }
+  // owner-data component
+  div.slideOutLeft {
+    background: $dark-outer-bg;
+  }
+
+  div.districtEle {
+    background-color: unset;
+    border-color: mat.get-color-from-palette($foreground, divider); //rgba(255, 255, 255, 0.12)
+  }
+
+  div.districtEleActive {
+    background: $dark-outer-bg;
+    border-color: var(--bs-gray-600);
+  }
+
+  div.boxOutline {
+    border-color: var(--bs-gray-600);
+  }
+  // building-ip component
+  .mat-column-id .activeProduce, .mat-column-id .staminaOutImg {
+    background-color: $dark-inner-bg;
+  }
+
+
+  .dropdown-menu .dropdown-item {
+    color: white;
+    margin-left: 4px;
+    margin-right: 4px;
+    text-indent: -4px;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+  }
+
+  .dropdown-menu mat-icon, .dropdown-menu .mat-slide-toggle-content {
+    color: white;
+  }
+
+  .dropdown-menu .dropdown-item:hover {
+    background-color: $dark-inner-bg;
+    border-radius: 6px;
+  }
+
+  .deleteAlert {
+    border: 1px solid white;
+  }
+
+  .scrollbarFancy::-webkit-scrollbar-thumb {
+    background-color: $dark-inner-bg;
+  }
+
+  .moneyIcon, .warningIcon {
+    color: inherit;
+  }
+
+  .messageItem {
+    border-bottom-color: gray;
+  }
+
+  .mat-button-toggle-appearance-standard {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  // Dialog
+  .containerDialog {
+    color: white
+  }
+  .actionMega{
+    background-color: rgba($dark-outer-bg, .9);    
+  }
+  .actionMega .balanceLabel{
+    color: lightgray;
+  }
+  .backgroundNoFocus {
+    background-color: $dark-outer-bg;    
+  }
+  .actionMega.backgroundNoFocus .balanceLabel{
+    color: lightslategray
+  }
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: $dark-outer-bg; //#212936
+  }
+
+  // Button Animation
+  .magnifyHistoryPosition:hover::after {
+    animation-name: sonarEffectDark;
+  }
+
+  .topBtnDiv .mat-button-toggle-checked button {
+    animation: glowBtnDoggleDark 1.4s ease-in-out infinite alternate;
+  }
+  // Icons
+  .topBtnDiv i.showTick {
+    color: white;
+  }
+
+  .ready{
+    color:lawngreen
+  }
+}
+
+
+
+
+header .container {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  min-height: auto;
+  padding-right: 0;
+}
+.avatarLink {
+  --alpha: .12;
+  --rgb: 0, 0, 0;
+}
+
+// Extra color used within materials
+// Mat-button
+.mat-mdc-raised-button {
+  font-family: Roboto,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.mat-mdc-raised-button:hover:not(:disabled) {
+  background-color: $light-button-active-glow;  
+}
+
+// Dialog
+.containerDialog{
+  color: lightslategray
+}
+.backgroundNoFocus {
+  background-color: #f5f5f5;
+}
+
+// Dropdown Menu
+.menuItem:hover {
+  background-color: $light-menu-hover-bg /*4% darger then white*/
+}
+.gradientBar {
+  background: rgb(21,101,192);
+  background: linear-gradient(270deg, rgba(21,101,192,1) 0%, rgba(140,180,224,1) 10%, rgba(227,237,247,.9) 44%, rgba(255,255,255,0) 80%);
+}
+
+// Mat-Datatable
+// Table Search field
+.tableFilter .material-icons {
+}
+.tableFilter .mdc-floating-label--float-above .material-icons {
+  color: $app-link-color
+}
+
+//   Expanded Rows
+table tr.mat-mdc-row:not(.detailRow):hover {
+  background: $app-row-hover
+}
+
+tr.mat-mdc-row:not(.detailRow):active {
+  background: #efefef;
+}
+
+// Button Animation
+.magnifyHistoryPosition:hover::after {
+  animation-name: sonarEffect;
+}
+
+
+// ICONS
+.topBtnDiv i {
+  color: white;
+}
+.topBtnDiv i.showTick {
+  color: green;
+}
+
+
+a.closeframe:hover {
+  color: mat.get-color-from-palette($light-app-warn);
+}
+
+.mat-button-toggle {
+}
+
+.mat-button-toggle-checked {
+  background-color: mat.get-color-from-palette($light-app-accent);
+}
+
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard {
+  color: white;
+}
+
+
+.districtNum {
+  color: darkslateblue
+}
+
+// Owner-data Feature
+div.districtEle {
+  background-color: white;
+}
+//table tab icons
+.typeFilter{  
+  border-color: #d3d3d3;
+}
+
+.districtSell, a.showAllLink i.fa-times {
+  color: #8b0000;
+}
+
+.avatarLink:hover .ownerImg {
+  background: #e1f1fd;
+}
+.avatarLink:hover .mysteryLight {
+  background-color: lightsalmon;
+}
+
+
+.deleteAlert {  
+  border: 1px solid gray;
+}
+
+.adframe {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.scrollbarFancy::-webkit-scrollbar-thumb {
+  background-color: $app-link-color;
+}
+.moneyIcon {
+  color: $money-light
+}
+.warningIcon {
+  color: darkorange
+}
+.messageItem {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+}
+.shake1:before, .shake2:before, .shake1:after, .shake2:after {
+  border: 0 solid transparent;
+  border-top: 2px solid darkgray;
+}
+
+.ready{
+  color:limegreen
+}
+
+// Final overwrites - higher specificity then above rules
+@import "scss/overwrite_material_styles.scss";
+
+// Add frame animations
+@import "scss/frames_animation.scss";

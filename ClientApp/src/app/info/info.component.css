@@ -1,0 +1,132 @@
+.section {
+  width: 800px;
+  border-radius: 8px;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 30px;  
+}
+.section1{
+  display:flex;
+  flex-direction:row;
+}
+  .section1 img {
+    height: 200px;
+    align-self: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+.section2 {
+  display: flex;
+  flex-direction: row;
+}
+  .section2 img {
+    height: 300px;
+    margin-right: 20px;
+    align-self: center;
+    border-radius: 8px;
+    margin-bottom:20px;
+  }
+
+
+h1, h2, p, span {
+  font-family: Basel
+}
+span{
+  font-size:17px;
+}
+
+p{
+  line-height: 1.5rem;
+}
+
+p span{
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.strip {
+  height: 180px;
+  margin-bottom: 30px;
+}
+  .strip .content {
+    background-color: #3283c4;
+    position: absolute;
+    height: 180px;
+    width: 100%;
+    left: 0;
+  }
+  .strip h2 {
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    letter-spacing: .1rem;
+
+  }
+  .strip .client {
+    z-index: 1;
+    position: relative;
+    color: white;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 10px;
+    margin-right: 16px;
+    margin-bottom: 20px;
+    
+  }
+  .strip .doubleRow, .doubleRow {
+    height: 280px;
+  }
+.client a {
+  display: flex;
+  justify-content: center;
+}
+.client img {
+  height: 80px;
+  max-width: 90%;
+}
+.product .client img {
+  height: 80px
+}
+
+.stripRow {
+  display: flex;
+  flex-direction: row;
+  padding-top: 40px;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1200px) {
+  .strip ,.strip .content {
+    height: 400px
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .section1, .section2{
+    flex-direction:column
+  }
+  .section1{
+    flex-direction:column-reverse
+  }
+  .section{
+    width: unset;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  span {
+    font-size:14px;
+  }
+
+  .strip .client{
+    width: 170px
+  }
+}

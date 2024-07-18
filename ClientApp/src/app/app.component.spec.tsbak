@@ -1,0 +1,120 @@
+import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter, Router, RouterLink } from '@angular/router';
+
+import { AppComponent } from './app.component';
+//import { appConfig } from './app.config';
+//import { UserService } from './model';
+
+
+import { RouterTestingModule } from '@angular/router/testing';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Application } from './common/application';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+import { getBaseUrl } from '../main';
+
+@Component({ standalone: true, selector: 'router-outlet', template: '' })
+class RouterOutletStubComponent {}
+
+let comp: AppComponent;
+let fixture: ComponentFixture<AppComponent>;
+
+describe('AppComponent & TestModule', () => {
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule(
+      Object.assign({}, /*appConfig,*/ {
+        imports: [
+          AppComponent,
+          //BannerStubComponent,
+          RouterLink,
+          RouterOutletStubComponent,
+          //WelcomeStubComponent,
+        ],
+        declarations: [          
+        ],
+        providers: [
+          provideRouter([]), //UserService,*/
+          { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+          { provide: 'BASE_URL', useFactory: document.getElementsByTagName('base')[0].href, deps: [] }
+        ],
+      }),
+    )
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        comp = fixture.componentInstance;
+      });
+  }));
+  tests();
+
+});
+
+
+function tests() {
+  let routerLinks: RouterLink[];
+  let linkDes: DebugElement[];
+
+  beforeEach(() => {
+    fixture.detectChanges(); // trigger initial data binding
+
+    // find DebugElements with an attached RouterLinkStubDirective
+    linkDes = fixture.debugElement.queryAll(By.directive(RouterLink));
+
+    // get attached link directive instances
+    // using each DebugElement's injector
+    routerLinks = linkDes.map((de) => de.injector.get(RouterLink));
+  });
+
+  it('can instantiate the component', () => {
+    expect(comp).not.toBeNull();
+  });
+
+  it('can get RouterLinks from template', () => {
+    expect(routerLinks.length).withContext('should have 2 routerLinks').toBe(3);
+    //expect(routerLinks[0].href).toBe('/dashboard');
+    expect(routerLinks[0].href).toBe('/test');
+    expect(routerLinks[1].href).toBe('/info');
+  });
+
+  it('can click info link in template', fakeAsync(() => {
+    const infoLinkDe = linkDes[1]; // link DebugElement
+
+    TestBed.inject(Router).resetConfig([{ path: '**', children: [] }]);
+    infoLinkDe.triggerEventHandler('click', { button: 0 });
+    tick();
+    fixture.detectChanges();
+
+    expect(TestBed.inject(Router).url).toBe('/info');
+  }));
+}
+
+/*
+describe('AppComponent', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        //RouterTestingModule,
+        HttpClientModule,
+        //HostBinding
+      ],
+      declarations: [
+        AppComponent,
+      ],
+      providers: [
+        //Application,
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+        { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+      ]
+    }).compileComponents();
+  }));
+
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
+
+});
+*/

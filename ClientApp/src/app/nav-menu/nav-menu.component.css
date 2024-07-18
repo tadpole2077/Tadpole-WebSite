@@ -1,0 +1,179 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.navbar{
+  padding: 4px 0
+}
+  .navbar a.nav-link {
+    line-height: 1.1em;
+    padding: 6px 12px 6px 12px;
+  }
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+
+.appButtons{
+  display:flex;
+}
+.buttonEffect {
+  font-size: 16px;
+  padding-left: 20px;
+  padding-right: 20px
+}
+.reducedFont {
+  font-size: 14px
+}
+
+.swap {
+  margin-left: 20px;
+}
+.swapText {
+  font-size: 14px;
+  color: white;
+}
+  .swap img {
+    height: 22px;
+    margin-left: 4px;
+  }
+
+
+/*** Link underline amine ***/
+a {
+  position: relative;
+  text-decoration: none;
+}
+  a:hover {
+  }
+a.nav-link {
+  line-height: 28px;
+}
+
+.dayExpiry {
+  position: absolute;
+  margin-top: 14px;
+  margin-left: -22px;
+  color: lightcoral;
+  font-size: .6rem;
+  font-weight: bold;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #fff;
+  width: 3rem;
+}
+
+.world{
+
+}
+
+.balance {
+  align-self: flex-start;
+  margin-top: 3px;
+}
+
+.alertHistory {
+  position: absolute;
+  top: 0.9rem;  
+  font-size: 1.6rem;
+  margin-right: 1rem;
+  padding-left: 10px;
+}
+.desktopAlert{
+  display: inline-block;
+}
+.mobileAlert {
+  display: none;
+}
+.gradientBar {
+  height: 0.667px;
+  width: 140px;
+  position: absolute;
+  margin-top: -42px;
+  margin-right: 6px;
+  z-index: 1;
+}
+
+.barTop {
+  position: absolute;
+  margin-top: -43px;
+}
+.barBottom {
+  position: absolute;
+  margin-top: 42px;  
+}
+
+.discordButton {
+  background-color: #7289da;
+  display: inline-block;
+  height: 28px;
+  margin-right: 10px;
+  padding: 2px;
+  border-radius: 4px;
+  vertical-align: top;
+}
+
+.discordIcon {
+  background: url("../../../../wwwroot/images/discordLogo.svg") 50% no-repeat;
+  width: 104px;
+  height: 24px;
+  background-size: 110px 20px;
+  display: inline-block;
+  transition: opacity .25s ease-out;
+}
+  .discordIcon:hover {
+    opacity: .6;
+  }
+
+@media only screen and (max-width: 426px) {
+
+  .appButtons {
+    display: flex;
+  }
+
+  .nav-item{
+    width: 50%;
+  }
+
+  .mobileAlert{
+    display: inline-block;
+  }
+  .desktopAlert {
+    display: none;
+  }
+  .gradientBar{
+    display:none;
+  }
+
+  .world {
+    margin-right: 8px;
+  }
+
+  .alertHistory {
+    position: relative;
+    margin-top: unset;
+    margin-left: 10px;
+    padding-left: unset;
+    top: unset;
+  }
+  .balance{
+    margin-right: 0;
+    position: absolute;
+    right: 10px;
+    top: 56px;
+    display:none;
+  }
+  .show{
+    display:unset;
+  }
+}

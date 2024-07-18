@@ -1,0 +1,50 @@
+﻿
+1) Change Home Page router path >> Point to new home component
+File: app.module.ts
+Change: component to route to home page component.
+
+    RouterModule.forRoot([
+      { path: '', component: TESTBankManageComponent },      
+    ]),
+
+
+
+
+2) Index.html >> Home Page Container
+File: .\ClientApp\src\index.html
+
+Background:
+* index file is set by angular.json
+* default is src\index.html
+* index page view also using the typescript src\main.js controler 
+
+Change:
+* Title name found in index.html
+
+
+e
+3) app.component
+File: .\ClientApp\src\app.component.html & app.component.ts
+
+Background:
+* Default component loaded by SPA container page (index.html)
+* Typically containing a main navigation menu component and manages global features such as Light/Dark mode theme switching due to high level access to DOM.
+* If Jquery Bootstrap is used, AppComponent instance is passed to bootstrap and initiated .
+
+Change:
+* app-nav-menu is typically defined within the app.component.html pointing to the child component used to define the main navigation.
+
+
+
+3) SSL Certificate issue with localhost domain local dev testing 
+Ref:
+    https://stackoverflow.com/questions/73931726/why-is-my-localhost-self-signed-ssl-certificate-suddenly-invalid-in-chrome
+    https://stackoverflow.com/questions/70291876/how-to-force-visual-studio-to-re-create-the-ssl-certificate-for-a-net-core-web
+
+Delete ALL localhost certificate from Personal & Trusted Root Certificate folder (Certificate Manager)
+
+Delete old certificates in >> C:\Users\Peter\AppData\Roaming\ASP.NET\https
+
+Resolve by issues new certs - via powershell admin
+>dotnet dev-certs https --clean
+>dotnet dev-certs https --trust
