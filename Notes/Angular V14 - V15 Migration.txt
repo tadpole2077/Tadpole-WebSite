@@ -1,0 +1,437 @@
+﻿WHEN: 27/05/2023
+Angular Version: 15.2.9
+
+Links:
+https://update.angular.io/?l=2&v=14.0-15.0
+https://angular.io/guide/versions
+
+Node:
+	* (Not using) Node V18.20.3	- Node 18.20.3 Uses NPM V10.7.0
+												Security Issue with older version of NPM (see below for details) https://www.npmjs.com/package/npm/v/10.7.0
+												(cmd) nvm 18.20.3 ,  nvm use 18.20.3
+	* (2024-07 active using) Node V16.20.2		- (cmd)nvm list >> V18.10.0 or higher is latest node version required for V15x Angular
+												alt is ^V16.13.0 or higher within V16.x tier also supported (see guide link for more info) https://nodejs.org/en/download/package-manager
+												V16.20.2 Node uses NPM V8.19.4 : https://www.npmjs.com/package/npm/v/8.19.4
+
+	* previously using with V14 Angular : V16.10.0
+
+
+Run Test:
+	cmd: npm start					- works, compiles & loads angular engine and site without issue.
+	MetaveseMax > IIS Express run	- details in angular.docx
+	npm i typescript@4.9.4			- required for angular V15
+	npm i @angular/cli@15.2.8 -g	- as new version of node installed, need the basic ng cli within the GLOBAL NPM store - needed update angular to V15 on local project
+
+Reading:
+	Typescript 4.6 changes https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/
+
+Apply To: CMD > CD D:\0_Development\2_Applications\GitHub\MetaverseMax\MetaverseMax\ClientApp
+
+
+Main Run (note check prerequisites within angular guide first && select 'I use Angular Material'):
+	Commit files to Git
+	Angular upgrade 14.2.11 to 15.2.9,  + Materials + medium complexity
+	ng update @angular/core@15 @angular/cli@15
+	ng update @angular/material@15
+
+
+Actions:
+	npm i @angular-devkit/build-angular@15.2.8 -force  (as didnt get updated on 15.2.9 core update)
+		Showing dependency errors with:
+		@ng-bootstrap/ng-bootstrap@13.1.1
+		 C:\Users\Peter\AppData\Local\npm-cache\_logs\2023-05-28T01_24_34_170Z-debug-0.log
+		 C:\Users\Peter\AppData\Local\npm-cache\eresolve-report.txt
+		*** Needed for force install, as ng-bootstrap cant be installed without also throwing error on peer of this package
+	
+	npm i @ng-bootstrap/ng-bootstrap@14.2.0   (prior version @13.1.1) : https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap/v/14.2.0
+		** Installs fine after forcing build-angular install,  rerun of build-angular install after this and no errors are shown.
+
+	npm i bootstrap@5.2.3 : previous version bootstrap@5.1.3  (recommended for V15.x.x Angular as per https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap/v/15.0.0?activeTab=readme)
+
+	** RXJS is fine no updated need - using prior verion rxjs@7.5.5	
+
+	npm i @swimlane/ngx-charts@20.3.0 https://www.npmjs.com/package/@swimlane/ngx-charts
+
+
+
+Potential Code change:
+> (Potential CSS Impact - as in use) In v15, the Angular compiler prefixes @keyframes in CSS with the component's scope. 
+  This means that any TypeScript code that relies on keyframes names no longer works in v15. Update any such instances to: define keyframes programmatically, use global stylesheets, or change the component's view 
+  encapsulation. Read further https://angular.io/guide/update-to-version-15#v15-bc-03
+
+> In Angular Material v15
+  Many of the components have been refactored to be based on the official Material Design Components for Web (MDC). 
+  This change affected the DOM and CSS classes of many components. Read further https://rc.material.angular.io/guide/mdc-migration
+
+> In your application's tsconfig.json file, remove enableIvy. In v15, Ivy is the only rendering engine so enableIvy is not required.
+
+
+> In Angular version 15, the deprecated `relativeLinkResolution` config parameter of the Router is removed.
+  This migration removes all `relativeLinkResolution` fields from the Router config objects.
+  Migration completed (No changes made).
+
+> Since Angular v15, the `RouterLink` contains the logic of the `RouterLinkWithHref` directive.
+  This migration replaces all `RouterLinkWithHref` references with `RouterLink`.
+  Migration completed (No changes made).
+
+
+✓  Updated Angular Material to version 15
+
+UPDATE src/theme.scss (11614 bytes)
+UPDATE src/app/app.module.ts (7336 bytes)
+UPDATE src/app/owner-data/owner-data.component.ts (23572 bytes)
+UPDATE src/app/district-summary/district-summary.component.ts (11149 bytes)
+UPDATE src/app/production-history/prod-history.component.ts (11825 bytes)
+UPDATE src/app/building-ip/building-ip.component.ts (16948 bytes)
+UPDATE src/app/nav-menu-owner/nav-menu-owner.component.ts (2438 bytes)
+UPDATE src/app/offer-modal/offer-modal.component.ts (5289 bytes)
+UPDATE src/app/citizen-building-table/citizen-building-table.component.ts (5529 bytes)
+UPDATE src/app/citizen-modal/citizen-modal.component.ts (7498 bytes)
+UPDATE src/app/pet-modal/pet-modal.component.ts (4077 bytes)
+UPDATE src/app/alert-menu/alert-menu.component.ts (3926 bytes)
+UPDATE src/app/tax-change/tax-change.component.ts (3998 bytes)
+UPDATE src/app/district-list/district-list.component.ts (3504 bytes)
+UPDATE src/app/district-notification/district-notification.component.ts (4289 bytes)
+UPDATE src/app/search-plot/search-plot.component.ts (606 bytes)
+
+
+
+======================================================================================
+Angular CLI UPDATES -  2024/07/24
+======================================================================================
+
+npm i @angular/cli@15.2.11		(published 2024/07/18 - local version update)
+npm i @angular/cli@15.2.11 -g	(update global as well)
+
+npm i @angular-devkit/core@15.2.11
+npm i @angular-devkit/core@15.2.11 -g
+
+Angular Update: 
+	From Version: 15.2.9
+	To Version: 15.2.10
+Issue
+	Upstream dependency issue with ng-bootstrap/ng-bootstrap^14.2.0
+Resolve
+	ng update 15.2.10
+
+	npm i @angular/core@15.2.10
+	npm i @angular/common@15.2.10
+	npm i @angular/animations@15.2.10
+	npm i @angular/localize@15.2.10
+	npm i @angular/compiler@15.2.10npm,
+
+
+
+======================================================================================
+WEB 3
+
+	npm i web3@4.0.1
+
+	[2023/10/20] Updated Packages:
+	npm i web3@4.2.0  
+	Using Packages:
+		web3-core
+		web3-utils
+		web3.eth
+		web3-validator
+	[2023/10/23] Problem :  using method.send() with any arguments,  reverting back to V4.0.1 works.
+
+
+	[2024/05/06] Updated Packages:
+	npm i web3@4.7
+
+	Notes:  Supports Multi-Wallet EIP-6963 - resolves race condition when using multiple wallets.  Issue with Tron extension using Ethereum DOM object interferance with Metamask usage.
+
+
+	Updates:  web3 4.x : rewritten in typescript and is strongly typed.
+
+
+
+
+======================================================================================
+Bootstrap 5 components in use:
+1) navbar  :  Main navigation top toolbar + mobile responsiveness  
+2) ngbDropdown : Dropdown lists  >> 
+	District List
+	Account List
+	World List
+
+3) A lot of the base page styles
+4) possibly more - to test drop : angular.json > node_modules/bootstrap/dist/css/bootstrap.min.css
+
+MOVING AWAY:
+If moving away from bootstrap - Start with ngbDropdown, transition to another Material V3 drop down list
+Until then pain points as managing material styles + bootstrap combined.  A lot of extra css to tweak it to work.  
+Centralise those tweaks to allow easiler migration and removal on future release.
+
+======================================================================================
+Issue:
+	On Debug Run of System >> WARNING within CMD used to run Angular complile script >>    
+	TypeScript compiler options "target" and "useDefineForClassFields" are set to "ES2022" and "false" respectively by the Angular CLI. 
+	To control ECMA version and features use the Browerslist configuration. For more information, see https://angular.io/guide/build#configuring-browser-compatibility
+    NOTE: You can set the "target" to "ES2022" in the project's tsconfig to remove this warning.
+
+	CHANGES:
+		File: tsconfig.json
+		Setting: 
+			old >>  "target": "es2020"
+			new >>  "target": "es2022"
+    
+	Problem:
+	   Cant identify this object during debug within async typescript functions using ES2022
+	   Using es2015  - does show the this object, needed for debug
+	   Discuss: https://github.com/microsoft/vscode/issues/143598
+
+=====================================================================================
+Issue (outstanding - none blocking - as of 2023/09/15)
+// Component: district-summary.component >> Graph @swimlane/ngx-charts
+// Browser warning in Brave 
+//	Due to loading this graph type (both Fund & Distributoin period) : Example Eth - district 152
+//	WARNING: 
+//		The animation trigger "animationState" is attempting to animate the following not animatable properties: strokeDashoffset
+//		(to check the list of all animatable properties visit https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties)
+//  OBSERVATIONS:
+//		Only occuring on component load,  not reloading the graph with new data - ie changing district
+
+
+
+
+=====================================================================================
+Issue:  2024/03/19  Github Email Report:   Json-schema   Critical Severity Vulnerability Detected
+Final Action: No change - issue only exists within development box when testing E2E, which i do not use.  Angular V16 drops E2E testing, so resolved on upgrade
+
+Package: json-schema
+Version: 0.2.3
+Recommendation:  Upgrade to ~> 0.4.0
+Issue: CVE-2021-3918
+Issue Detail: json-schema is vulnerable to Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')
+		In a prototype pollution attack, threat actors inject properties into existing JavaScript construct prototypes, attempting to compromise the application.
+
+	Dependencies:
+	1) jsprim-1.4.1.tgz    json-schema >> 0.2.3
+	   - Utilities for primitive JavaScript Types
+	   - Node: https://www.npmjs.com/package/jsprim?activeTab=versions
+	   - V1.4.1 is a 7 years old module
+
+Update:
+	Node Package: https://www.npmjs.com/package/jsonschema
+	Latest Version:  V1.4.1
+
+Dependency tree of a package
+	npm ls json-schema
+	Dependency Tree Output:
+		-- protractor@7.0.0
+			-- webdriver-manager@12.1.8
+				-- http-signature@1.2.0
+					-- jsprim@1.4.1
+						-- json-schema@0.2.3
+
+Checking upgrade of package protractor@7.0.0
+	npm ls protractor
+	Dependency Tree Output:
+	-- @angular-devkit/build-angular@15.2.8
+		-- protractor@7.0.0
+
+Build-angular Dependencies:
+	- "protractor": "^7.0.0"   // Can upgrade to all minor releases from V7.x  to below V8 (major version)
+	What is Protractor: end-to-end test framework for [Angular] , Webdriver E2E test wrapper for Angular
+	Github: https://github.com/angular/protractor
+	Node: https://www.npmjs.com/package/protractor
+	NOTE: Package deprecated, end-of-life in Summer 2023
+	Read more : 
+	- https://goo.gle/state-of-e2e-in-angular
+	- By Angular V16 : Protractor is fully deprecated, use 3 alternative e2e (end-to-end) testing solutions.
+
+	Final Analysis:
+	- https://github.com/angular/angular-cli/issues/25298
+	- No action required, on upgrade to V16 it will be removed.  
+	- Protractor should only be used within development environment for testing E2E.
+
+
+
+
+
+
+=====================================================================================
+Github Dependabot Alerts - Node package warnings.
+=====================================================================================
+Issue:  2024/03/24  Github Email Report:   webpack-dev-middleware Package :  High Severity Vulnerability Detected
+Issue Detail:  Potential Unauthorised access to files on server  (note also limited by pool user - rights)
+Additional Detail: https://github.com/advisories/GHSA-wr3j-pwj9-hqq6
+With Angular V15
+	Using webpack-dev-middleware V6.0.1 and V5.3.3
+
+Webpack-dev-middleware : 
+	An express-style development middleware for use with webpack bundles and allows for serving of the files emitted from webpack. 
+	This should be used for development only.
+
+Cmd:
+	cd D:\0_Development\2_Applications\GitHub\MetaverseMax\MetaverseMax\ClientApp
+	npm ls webpack-dev-middleware
+
+Dependencies:
+`-- @angular-devkit/build-angular@15.2.8
+  +-- webpack-dev-middleware@6.0.1
+  `-- webpack-dev-server@4.11.1
+    `-- webpack-dev-middleware@5.3.3
+
+
+Fix:
+	https://github.com/angular/angular-cli/pull/27337
+	Action: Upgrade @angular-devkit/build-angular from V15.2.8 to V15.2.10  >> npm i @angular-devkit/build-angular@15.2.10
+	Action: Update webpack-dev-middleware from V6.0.1 to 6.1.2 >> npm i webpack-dev-middleware@6.1.2
+	Action: Updated @angular-devkit/build-angular >> package.json :  changed :   webpack-dev-middleware from V6.0.1 to 6.1.2jh
+	https://www.npmjs.com/package/@angular-devkit/build-angular/v/15.2.10
+
+
+
+============================================================
+Issue: 2024/04/16 json-schema : CVE-2021-3918 Critical severity
+Current Version: < 0.4.0 
+Upgrade To: ~> 0.4.0
+
+Summary:
+- Only used by Protractor Testing Tool, which is not used by MetaverseMax, and should not be deployed to Production.
+- Protractor has reached end-of-life support, and will be removed from >V15 Angular deploys.
+
+Cmd:
+	cd D:\0_Development\2_Applications\GitHub\MetaverseMax\MetaverseMax\ClientApp
+	npm ls json-schema
+
+Dependencies:
+`-- protractor@7.0.0
+  `-- webdriver-manager@12.1.8
+    `-- request@2.88.2
+      `-- http-signature@1.2.0
+        `-- jsprim@1.4.1
+          `-- json-schema@0.2.3
+
+Protractor used by:
++-- @angular-devkit/build-angular@15.2.10
+| `-- protractor@7.0.0 deduped
+`-- protractor@7.0.0
+
+Protractor Details:
+- Webdriver E2E test wrapper for Angular
+- https://github.com/angular/protractor
+- https://www.protractortest.org/#/
+- Protractor reached end-of-life in August 2023
+- How to remove protractor from Angular 15 : https://github.com/angular/angular-cli/issues/25298
+
+
+==============================================================
+Issue: 2024/04/16 loader-utils	CVE-2022-37601 Critical severity
+Current Version: < 2.0.3  
+Upgrade To: ~> 2.0.3
+
+Links:
+	https://www.npmjs.com/package/loader-utils  : Latest 3.2.1 && 2.0.4
+
+Cmd:
+	cd D:\0_Development\2_Applications\GitHub\MetaverseMax\MetaverseMax\ClientApp
+	npm ls loader-utils
+
+
+Dependencies:
+`-- @angular-devkit/build-angular@15.2.10
+  +-- loader-utils@3.2.1
+  `-- resolve-url-loader@5.0.0
+    +-- adjust-sourcemap-loader@4.0.0
+    | `-- loader-utils@2.0.0 deduped
+    `-- loader-utils@2.0.0
+
+Action: 
+- Upgrade loader-utils from 2.0.0 to 2.0.4  >> npm i loader-utils@2.0.4
+
+
+==============================================================
+Issue: 2024/04/16 crypto-js	CVE-2023-45133 Critical severity
+Current Version: < 4.2.0  
+Upgrade To: ~> 4.2.0
+
+Ref:
+- Bug Details : issue relates to Babel compiler : https://nvd.nist.gov/vuln/detail/CVE-2023-45133
+- oidc-client : Library to provide OpenID Connect (OIDC) and OAuth2 protocol. This was original added to support VS in V13. Not sure if its even used.
+- https://www.npmjs.com/package/oidc-client  : 1.11.5 is latest version from 3 years ago!!
+- using oidc-client with .net angular : https://medium.com/@jorge.cotillo/asp-net-core-angular2-openid-connect-using-visual-studio-code-ed10327bb31a
+- OpenID User Authentication : https://auth0.com/blog/add-oidc-to-angular-apps-quickly/
+- Crypto-js - no longer maintained suggests using native browser crypto library : https://www.npmjs.com/package/crypto-js
+
+Summary:
+- I dont use OpenID (at present), its still in use by the community, no harm keeping it and upgrading the crypto javascript project.
+
+Cmd:
+	cd D:\0_Development\2_Applications\GitHub\MetaverseMax\MetaverseMax\ClientApp
+	npm ls crypto-js
+
+
+Dependencies:
+`-- oidc-client@1.11.5
+  `-- crypto-js@4.1.1
+
+Action: 
+- Upgrade crypto-js from 4.1.1 to 4.2.0 (last version)  >> npm i crypto-js@4.2.0
+
+
+
+
+==============================================================
+Issue: NPM - Vulnerability Issue - ip SSRF improper categorization in isPublic
+https://github.com/advisories/GHSA-2p57-rm9w-gvfp
+https://github.com/indutny/node-ip/issues/150
+Issue: 
+	Package : "IP" <= 2.0.1
+	NPM 8.19.4   :  2023/Feb/14 https://github.com/npm/cli/releases/tag/v8.19.4
+	NPM Dependency with IP package, which is not activity maintained and contains a security vulnerability to SSRS (Server side Request Forgery)
+	Dependency { "ip": "^2.0.0" } is referenced within package-lock.json as a dependency of "node_modules/socks" V2.7.1
+Resolve:
+	update NodeJS to V18.20.3 LTS(long term support june-2024),  which updates npm to V10.7.0 (Released 2024/Apr/30) https://github.com/npm/cli/releases/tag/v10.7.0
+
+
+
+
+
+=====================================================================================
+VISUAL STUDIO UPGRADE : 2023/11/20
+Action: Update to 17.8.0
+Warnings:
+	Some of your selections are no longer fully supported and will not receive security updates
+	1) .NET Core 3.1 Runtime (out of support)
+	2) .NET 5.0 Runtime (out of support)
+	2) .NET SDK (out of support)
+
+	How to uninstall .NET Core 3.1 Runtime?
+	* Uninstall Apps & Features:
+	- Microsoft .NET Core 3.1.32 Windows Server
+	- Microsoft .NET Core Runtime 3.1.32 (x64)
+	- Microsoft .NET Core Runtime 3.1.32 (x86)
+	- Microsoft .NET Core SDK 3.1.32 - Shared Framework
+	- Microsoft ASP.NET Core 3.1.32 - Shared Framework
+	- Microsoft Windows Desktop Runtime - 3.1.32
+
+	NOTE - I am not using these in active development, potential old projects like Transforms.
+
+=====================================================================================
+VISUAL STUDIO UPGRADE : 2024/05/02
+Action: Upgrade from .Net V6 to .Net V8
+Steps:
+1) https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+Already Installed:
+- SDK 8.0.204 :  Needed to Build Apps and Run V8 .Net Apps (Included in V17.9.6 VS - latest as of 2/5/2024)
+
+On Server (Windows 2019 Standard) - already installed:
+- ASP.NET Core 7.0.2 - Shared Framework
+- MS .NET Runtime - 7.0.2 (x86)
+Change:
+- Recommended to installed "ASP.NET Core Runtime 8.0.4" >>Hosting Bundle
+  includes .Net Runtime and IIS Support.
+- Installed "Hosting Bundle" >> https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+- Restart of IIS required
+- Showing "MS ASP.NET Core 8.04" & "MS .NET Runtime - 8.0.4" : now installed.
+
+OS Compatibility List: https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md
+
+Steps to Upgrade V6 to V8
+https://devblogs.microsoft.com/dotnet/upgrade-assistant-now-in-visual-studio/
+- Right click on target project >> Upgrade >> Install upgrade Assistant
+

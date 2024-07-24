@@ -1,36 +1,33 @@
 .section {
-  width: 800px;
   border-radius: 8px;
   background-color: white;
   padding: 20px;
-  margin-bottom: 30px;  
+  margin-bottom: 30px;
+  margin-left: 40px;
+  margin-right: 40px
 }
 .section1{
   display:flex;
   flex-direction:row;
 }
-  .section1 img {
-    height: 200px;
+  .section img {
+    width: 40%;
     align-self: center;
     border-radius: 8px;
     margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
   }
 
 .section2 {
   display: flex;
   flex-direction: row;
 }
-  .section2 img {
-    height: 300px;
-    margin-right: 20px;
-    align-self: center;
-    border-radius: 8px;
-    margin-bottom:20px;
-  }
 
 
 h1, h2, p, span {
-  font-family: Basel
+  /*font-family: Basel*/
+  font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif
 }
 span{
   font-size:17px;
@@ -48,6 +45,7 @@ p span{
 .strip {
   height: 180px;
   margin-bottom: 30px;
+  padding-top: 4px;
 }
   .strip .content {
     background-color: #3283c4;
@@ -55,6 +53,7 @@ p span{
     height: 180px;
     width: 100%;
     left: 0;
+    padding-top: 6px;
   }
   .strip h2 {
     color: white;
@@ -76,7 +75,7 @@ p span{
     padding: 10px;
     margin-right: 16px;
     margin-bottom: 20px;
-    
+    border-radius: 8px;
   }
   .strip .doubleRow, .doubleRow {
     height: 280px;
@@ -96,8 +95,9 @@ p span{
 .stripRow {
   display: flex;
   flex-direction: row;
-  padding-top: 40px;
+  padding-top: 44px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -113,8 +113,12 @@ p span{
   .section1{
     flex-direction:column-reverse
   }
+  .section img {
+    width: 100%;
+  }
   .section{
     width: unset;
+    margin: unset;
   }
   h1 {
     font-size: 20px;

@@ -39,6 +39,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { Application } from './common/application';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { Application } from './common/application';
     ImageFallbackDirective,
    
     InfoComponent,
+         FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
