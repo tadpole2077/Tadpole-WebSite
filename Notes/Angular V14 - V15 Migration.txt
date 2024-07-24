@@ -112,13 +112,7 @@ Angular Update:
 Issue
 	Upstream dependency issue with ng-bootstrap/ng-bootstrap^14.2.0
 Resolve
-	ng update 15.2.10
-
-	npm i @angular/core@15.2.10
-	npm i @angular/common@15.2.10
-	npm i @angular/animations@15.2.10
-	npm i @angular/localize@15.2.10
-	npm i @angular/compiler@15.2.10npm,
+	deleted node_modules folder >> updated package.json to correct angular versions for 15.2.10 >> npm update
 
 
 
