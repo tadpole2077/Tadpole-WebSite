@@ -1,17 +1,18 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "resolveJsonModule": true,              /* used to import JSON files */
+    "resolveJsonModule": true, /* used to import JSON files */
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "declaration": false,
-    "esModuleInterop": true,
+    "esModuleInterop": false, /* true causes issue with default SSR express server.ts code */
     "experimentalDecorators": true,
     "lib": [
       "ES2022",
       "dom"
     ],
-    "module": "es2020",
+    "module": "ES2022",
     "moduleResolution": "node",
     "outDir": "./dist/out-tsc",
     "skipLibCheck": true,
@@ -24,14 +25,17 @@
     "paths": {
       "web3": [ "node_modules/web3" ],
       "crypto": [ "node_modules/crypto-js" ],
-      "tronweb": ["node_modules/tronweb"]
-    }
+      "tronweb": [ "node_modules/tronweb" ]
+    },
+
+    "importHelpers": true, /* test from ssr default proj */
+    "forceConsistentCasingInFileNames": true /* test from ssr default proj */
   },
   "angularCompilerOptions": {
-    /*"allowSyntheticDefaultImports": true,
-    "esModuleInterop": true*/
-    "strictInjectionParameters": true,  // taken from test vs2022 template - not set before
-    //"strictInputAccessModifiers": true, // taken from test vs2022 template - not set before
-    //"strictTemplates": true             // taken from test vs2022 template - not set before
+    /*"allowSyntheticDefaultImports": true */
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

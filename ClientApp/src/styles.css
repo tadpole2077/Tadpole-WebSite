@@ -86,7 +86,40 @@ a.lineAnim:hover::before {
 
 .logo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  width: 100%
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
+  color: cadetblue;
+}
+
+.phone {
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+.email {
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 426px) {
+  .logo {
+    flex-direction: column;
+    padding-left: 0;
+  }
+    .logoImg {
+      width:80%
+    }
+
+  .contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 12px;
+    margin-bottom:6px;
+    width:100%
+  }
 }

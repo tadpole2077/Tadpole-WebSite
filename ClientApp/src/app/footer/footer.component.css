@@ -1,0 +1,17 @@
+
+.footerBlock { 
+  height: 63px;
+  margin: 0px auto;
+  text-align: center;
+  border-top: 1px solid #4482b4;
+  text-align: center;
+  font-weight: 500;
+}
+
+.angular15{
+  height: 100px
+}
+
+.dotnet8{
+  height: 70px;
+}

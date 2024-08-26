@@ -24,7 +24,7 @@ module.exports = PROXY_CONFIG;
 // Good ref sites
 // https://medium.com/ngconf/how-to-proxy-http-requests-in-angular-f873183880a4
 // http-proxy events
-//    Test template logs (not shown in Angular_VS_TEST) >>  [webpack-dev-server] [HPM] Subscribed to http-proxy events: [ 'error', 'close' ]
+//    Test template logs (not shown in TadpoleWebSite) >>  [webpack-dev-server] [HPM] Subscribed to http-proxy events: [ 'error', 'close' ]
 //    Node Module : https://www.npmjs.com/package/http-proxy-middleware : http-proxy-middleware@2.0.6   (same version as test template)
 //
 // http-proxy-middleware Node Module
@@ -34,5 +34,5 @@ module.exports = PROXY_CONFIG;
 //       [webpack-dev-server] [HPM] Subscribed to http - proxy events: ['error', 'close']
 //
 // Configuration to use:
-//    File: angular.json >> projects >> Angular_VS_TEST >> architect >> serve >> configurations >> development
+//    File: angular.json >> projects >> TadpoleWebSite >> architect >> serve >> configurations >> development
 //    Setting: "proxyConfig": "proxy.config.js"

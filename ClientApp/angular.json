@@ -1,177 +1,207 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
-      "Angular_VS_TEST": {
-        "root": "",
-        "sourceRoot": "src",
-        "projectType": "application",
-        "prefix": "app",
-        "schematics": {},
-        "architect": {
-          "build": {
-            "builder": "@angular-devkit/build-angular:browser",
-            "options": {
-              "allowedCommonJsDependencies": [ "crypto", "web3" ], // note that this is the key of --> "crypto":["node_modules/crypto-js"]"
-              "progress": false,
-              "outputPath": "dist",
-              "index": "src/index.html",
-              "main": "src/main.ts",
-              "polyfills": "src/polyfills.ts",
-              "tsConfig": "tsconfig.app.json",
-              "assets": [
-                "src/assets"
+  "newProjectRoot": "projects",
+  "projects": {
+    "TadpoleWebSite": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [ "crypto", "web3" ], // note that this is the key of --> "crypto":["node_modules/crypto-js"]"
+            "progress": false,
+            "outputPath": "dist/tadpolesite/browser",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              {
+                "glob": "*/*",
+                "input": "../wwwroot",
+                "output": ""
+              }              
+            ],
+            "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "src/theme.scss"
+            ],
+            "scripts": [
+              /*"src/notification_test.js"*/
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
+                }
               ],
-              "styles": [
-                "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-                /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
-                "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "src/styles.css",
-                "src/theme.scss"
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
               ],
-              "scripts": [
-                /*"src/notification_test.js"*/
-              ],
-              "aot": false,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "buildOptimizer": false,
               "sourceMap": true,
-              "optimization": false,
               "namedChunks": true
-            },
-            "configurations": {
-              "production": {
-                "budgets": [
-                  {
-                    "type": "initial",
-                    "maximumWarning": "500kb",
-                    "maximumError": "3mb"
-                  },
-                  {
-                    "type": "anyComponentStyle",
-                    "maximumWarning": "10kb",
-                    "maximumError": "20kb"
-                  }
-                ],
-                "fileReplacements": [
-                  {
-                    "replace": "src/environments/environment.ts",
-                    "with": "src/environments/environment.prod.ts"
-                  }
-                ],
-                "optimization": true,
-                "outputHashing": "all",
-                "sourceMap": false,
-                "namedChunks": false,
-                "aot": true,
-                "extractLicenses": true,
-                "vendorChunk": false,
-                "buildOptimizer": true
-              },
-              "development": {
-                "buildOptimizer": false,
-                "optimization": false,
-                "vendorChunk": true,
-                "extractLicenses": false,
-                "sourceMap": true,
-                "namedChunks": true
-              }
-            },
-            "defaultConfiguration": "production"
-          },
-          "serve": {
-            "builder": "@angular-devkit/build-angular:dev-server",
-            "options": {
-              "browserTarget": "Angular_VS_TEST:build"
-            },
-            "configurations": {
-              "production": {
-                "browserTarget": "Angular_VS_TEST:build:production"
-              },
-              "development": { // new from Angular V12
-                "browserTarget": "Angular_VS_TEST:build:development",
-                "proxyConfig": "proxy.config.js" // development mode uses AspNetCore.SpaProxy to redirect, not used in Production.                
-              }
-            },
-            "defaultConfiguration": "development" // development | production, change to production for optimal performance if not explictly adding option to ng serve script command
-          },
-          "extract-i18n": {
-            "builder": "@angular-devkit/build-angular:extract-i18n",
-            "options": {
-              "browserTarget": "Angular_VS_TEST:build"
             }
           },
-          "test": {
-            "builder": "@angular-devkit/build-angular:karma",
-            "options": {
-              "polyfills": [ "zone.js", "zone.js/testing" ],
-              //"main": "src/test.ts",
-              // "include": [ "**/*.spec.ts" ],  added line based on --code-coverage test assertion error https://stackoverflow.com/questions/74671214/assertionerror-err-assertion-compilation-cannot-be-undefined-after-updating-t
-              //"polyfills": "src/polyfills.ts",
-              "tsConfig": "tsconfig.spec.json",
-              //"karmaConfig": "karma.conf.js",
-              "styles": [
-                "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-                /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
-                "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "src/styles.css",
-                "src/theme.scss"
-              ],
-              "scripts": [],
-              "assets": [
-                "src/assets"
-              ]
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "TadpoleWebSite:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "TadpoleWebSite:build:production"
+            },
+            "development": { // new from Angular V12
+              "browserTarget": "TadpoleWebSite:build:development",
+              "proxyConfig": "proxy.config.js" // development mode uses AspNetCore.SpaProxy to redirect, not used in Production.                
             }
           },
-          "server": {
-            "builder": "@angular-devkit/build-angular:server",
-            "options": {
-              "outputPath": "dist-server",
-              "main": "src/main.ts",
-              "tsConfig": "tsconfig.server.json",
+          "defaultConfiguration": "development" // development | production, change to production for optimal performance if not explictly adding option to ng serve script command
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "TadpoleWebSite:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [ "zone.js", "zone.js/testing" ],
+            //"main": "src/test.ts",
+            // "include": [ "**/*.spec.ts" ],  added line based on --code-coverage test assertion error https://stackoverflow.com/questions/74671214/assertionerror-err-assertion-compilation-cannot-be-undefined-after-updating-t
+            //"polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            //"karmaConfig": "karma.conf.js",
+            "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "src/theme.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/assets"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/tadpolesite/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "sass"
+          },
+          "configurations": {
+            "development": {
+              "optimization": false,
               "sourceMap": true,
-              "optimization": false
+              "extractLicenses": false,
+              "vendorChunk": true
             },
-            "configurations": {
-              "development": {
-                "optimization": true,
-                "outputHashing": "all",
-                "sourceMap": true, /* Needed to debug ts components*/
-                "namedChunks": false,
-                "extractLicenses": true
-              },
-              "production": {
-                "optimization": true,
-                "outputHashing": "all",
-                "sourceMap": false,
-                "namedChunks": false,
-                "extractLicenses": true
-              }
-            },
-            "defaultConfiguration": ""
-          }
-        }
-      },
-      "Angular_VS_TEST-e2e": {
-        "root": "e2e/",
-        "projectType": "application",
-        "architect": {
-          "e2e": {
-            "builder": "@angular-devkit/build-angular:protractor",
-            "options": {
-              "protractorConfig": "e2e/protractor.conf.js",
-              "devServerTarget": "Angular_VS_TEST:serve"
+            "production": {
+              "outputHashing": "media"
             }
-          }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "TadpoleWebSite:build:development",
+              "serverTarget": "TadpoleWebSite:server:development"
+            },
+            "production": {
+              "browserTarget": "TadpoleWebSite:build:production",
+              "serverTarget": "TadpoleWebSite:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "TadpoleWebSite:build:production",
+              "serverTarget": "TadpoleWebSite:server:production"
+            },
+            "development": {
+              "browserTarget": "TadpoleWebSite:build:development",
+              "serverTarget": "TadpoleWebSite:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
-    "cli": {
-      "analytics": "f460fdcd-c656-4252-b2b5-878b480c4273"
+    "TadpoleWebSite-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "TadpoleWebSite:serve"
+          }
+        }
+      }
     }
+  },
+  "cli": {
+    "analytics": "f460fdcd-c656-4252-b2b5-878b480c4273"
   }
 }
+

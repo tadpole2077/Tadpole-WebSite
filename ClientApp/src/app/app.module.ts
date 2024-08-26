@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -40,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { Application } from './common/application';
 import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -52,10 +52,10 @@ import { FooterComponent } from './footer/footer.component';
     ImageFallbackDirective,
    
     InfoComponent,
-         FooterComponent,
+    FooterComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -78,14 +78,11 @@ import { FooterComponent } from './footer/footer.component';
     MatListModule,
     MatDialogModule,
     DragDropModule,
-    NgbDropdownModule,
-    RouterModule.forRoot([
-      { path: '', component: InfoComponent },
-      { path: 'info', component: InfoComponent },
-    ]),
+    NgbDropdownModule,    
     BrowserAnimationsModule,
     ClipboardModule,
     NumberDecimalDirective,
+    AppRoutingModule,
   ],
   providers: [
     Application,
