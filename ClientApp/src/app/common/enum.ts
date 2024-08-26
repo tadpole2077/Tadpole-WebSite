@@ -19,7 +19,7 @@ enum HEX_NETWORK {
   POLYGON_ID = '0x89',
   BINANCE_ID = '0x38',      // 56 decimal
   BINANCE_TESTNET_ID = '0x61',
-};
+}
 
 const NETWORKS_DESC = {
   1: "Ethereum Main Network",
@@ -33,7 +33,7 @@ const NETWORKS_DESC = {
 
 enum METAMASK_ERROR_CODE {
   UNRECOGNISED_CHAIN = 4902, 
-};
+}
 
 
 

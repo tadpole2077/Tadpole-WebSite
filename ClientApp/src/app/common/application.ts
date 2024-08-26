@@ -42,12 +42,12 @@ export class Application {
   public appComponentInstance: AppComponent = null;
 
   // Flag tracks wallet allowed access to this site
-  private _walletApproved: boolean = false;
+  private _walletApproved = false;
   private _networkChainId: string;
   private _walletKeyFormated: string;
 
   public public_key: string;
-  public dark_mode: boolean = true;
+  public dark_mode = true;
 
   // ********** Observables ******************************
   // Service to capture when an account become active - used by components to update/enable account specific features
@@ -63,7 +63,7 @@ export class Application {
 
   set walletApproved(value) {    
 
-    let changed = this._walletApproved != value;
+    const changed = this._walletApproved != value;
     this._walletApproved = value;
 
     if (this._walletApproved) {
@@ -107,7 +107,7 @@ export class Application {
   getProviders = async() => {
 
     // Call and wait for the promise to resolve - Typescript requires mapping to type
-    let providers = await Web3.requestEIP6963Providers() as Map<string, EIP6963ProviderDetail>;
+    const providers = await Web3.requestEIP6963Providers() as Map<string, EIP6963ProviderDetail>;
 
     for (const [key, value] of providers) {
       console.log(value);
@@ -300,7 +300,7 @@ export class Application {
     const routeTree: UrlTree = this.router.parseUrl(path);
     const routeSegmentGroup: UrlSegmentGroup = routeTree.root.children[PRIMARY_OUTLET];
     let segmentList: UrlSegment[] = null;
-    let lastComponentName: string = "/";
+    const lastComponentName = "/";
 
     if (routeSegmentGroup != undefined) {
       segmentList = routeSegmentGroup.segments;

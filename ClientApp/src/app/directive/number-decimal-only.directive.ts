@@ -27,12 +27,12 @@ export class NumberDecimalDirective {
 
   inputEvent(event) {
 
-    let returnValue: boolean = false;
+    const returnValue = false;
     const initalValue = this._el.nativeElement.value;
-    let valueFourDecimalPlaces: number = 0;    
+    const valueFourDecimalPlaces = 0;    
 
     //console.log("input test - ", initalValue, ' isTrusted - ', event.isTrusted);
-    let filteredValue = initalValue.replace(/[^0-9.]/g, '');
+    const filteredValue = initalValue.replace(/[^0-9.]/g, '');
     
     // Enforce 4 decimal places
     if (filteredValue != null) {
@@ -40,7 +40,7 @@ export class NumberDecimalDirective {
       this._el.nativeElement.value = fixed4Places;  
     }
 
-    let splitValue = filteredValue.split(".");
+    const splitValue = filteredValue.split(".");
 
     // 1) Support enter of 0.0, 1.00 - user may be trying to enter a small fraction, up to a max of 4 places
     // 2) Support one trailing decimal place entry - dont filter if user entered  ie 10.
@@ -63,7 +63,7 @@ export class NumberDecimalDirective {
 
   keydownEvent(event: KeyboardEvent) {
     // Is Key press a decimal point
-    let decimalKeyPressed: boolean = event.key == ".";    
+    const decimalKeyPressed: boolean = event.key == ".";    
 
     // CHECK Already a decimal point in input
     if (decimalKeyPressed && this._el.nativeElement.value.indexOf(".") != -1) {

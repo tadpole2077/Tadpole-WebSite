@@ -13,7 +13,7 @@ export class Web3Utils {
   toBigInt: typeof toBigInt = toBigInt;
   toWei: typeof toWei = toWei;
 
-  constructor(CONTRACT_DECIMALS: number = 1e18, CONTRACT_DECIMALS_COUNT: number = 18) {
+  constructor(CONTRACT_DECIMALS = 1e18, CONTRACT_DECIMALS_COUNT = 18) {
     this.CONTRACT_DECIMALS = CONTRACT_DECIMALS;
     this.CONTRACT_DECIMALS_COUNT = CONTRACT_DECIMALS_COUNT;
   }
@@ -24,8 +24,8 @@ export class Web3Utils {
   convertFromEVMtoCoinLocale(amount: any, decimalPlaces: number, decimalCount: number = this.CONTRACT_DECIMALS_COUNT) {
 
     let amountString = amount.toString();
-    let amountDecimal: string = '';
-    let amountInteger: string = ''; 
+    let amountDecimal = '';
+    let amountInteger = ''; 
 
     if (amount != 0) {
       if (amountString.length >= decimalCount) {
@@ -34,7 +34,7 @@ export class Web3Utils {
       }
       else {
         //amountDecimal = amountString.padStart(decimalCount - amountString.length, '0');   // Issues using string.padStart()        
-        let padZero: string = '';
+        let padZero = '';
         for (let index = 0; index < decimalCount - amountString.length; index++) {
           padZero = '0' + padZero;
         }
@@ -72,9 +72,9 @@ export class Web3Utils {
 
   // Calculate actual tokens amounts based on decimals in token
   // Convert to string - ensure no localised chars .  Some issue with BigNumber adding additoinal values - may be due to using es2015
-  convertToCoinNumber(amount: any, allowanceExtra:number = 0): string{
+  convertToCoinNumber(amount: any, allowanceExtra = 0): string{
         
-    let stringAmount = '0';
+    const stringAmount = '0';
     let decimalLength = 0;
     let bigAmount: bigint;
 
