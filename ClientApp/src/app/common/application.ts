@@ -63,7 +63,6 @@ export class Application {
 
   set walletApproved(value) {    
 
-    const changed = this._walletApproved != value;
     this._walletApproved = value;
 
     if (this._walletApproved) {

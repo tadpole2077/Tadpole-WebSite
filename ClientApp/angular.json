@@ -13,7 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [ "crypto", "web3" ], // note that this is the key of --> "crypto":["node_modules/crypto-js"]"
+            "allowedCommonJsDependencies": [
+              "crypto",
+              "web3"
+            ],
             "progress": false,
             "outputPath": "dist/tadpolesite/browser",
             "index": "src/index.html",
@@ -26,18 +29,15 @@
                 "glob": "*/*",
                 "input": "../wwwroot",
                 "output": ""
-              }              
+              }
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/theme.scss"
             ],
-            "scripts": [
-              /*"src/notification_test.js"*/
-            ],
+            "scripts": [],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
@@ -95,12 +95,12 @@
             "production": {
               "browserTarget": "TadpoleWebSite:build:production"
             },
-            "development": { // new from Angular V12
+            "development": {
               "browserTarget": "TadpoleWebSite:build:development",
-              "proxyConfig": "proxy.config.js" // development mode uses AspNetCore.SpaProxy to redirect, not used in Production.                
+              "proxyConfig": "proxy.config.js"
             }
           },
-          "defaultConfiguration": "development" // development | production, change to production for optimal performance if not explictly adding option to ng serve script command
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -120,15 +120,13 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [ "zone.js", "zone.js/testing" ],
-            //"main": "src/test.ts",
-            // "include": [ "**/*.spec.ts" ],  added line based on --code-coverage test assertion error https://stackoverflow.com/questions/74671214/assertionerror-err-assertion-compilation-cannot-be-undefined-after-updating-t
-            //"polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
-            //"karmaConfig": "karma.conf.js",
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              /*"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",*/
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/theme.scss"
@@ -213,4 +211,3 @@
     "analytics": "f460fdcd-c656-4252-b2b5-878b480c4273"
   }
 }
-
