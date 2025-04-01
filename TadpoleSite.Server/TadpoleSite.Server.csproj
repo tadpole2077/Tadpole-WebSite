@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SpaRoot>..\TadpoleSite.client</SpaRoot>
+    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <SpaProxyServerUrl>https://localhost:63612</SpaProxyServerUrl>
+    <!-- Enable SPA build in Release mode -->
+    <!--<SpaBuildRelease Condition="$(Configuration) == 'Release'">false</SpaBuildRelease>-->
+
+    <!-- Enable SPA build in Debug mode (optional) -->
+    <!--<SpaBuildDebug Condition="$(Configuration) == 'Debug'">true</SpaBuildDebug>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
+      <Version>9.*-*</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TadpoleSite.client\TadpoleSite.client.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+  
+  
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Message Text=" OutDir: $(OutDir), ProjectDir: $(ProjectDir), OutputPath: $(OutputPath), PublishUrl $(PublishUrl)" Importance="high" />
+    <Message Text=" PublishPath: @($(ProjectDir)$(PublishUrl))" Importance="high" />
+    
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
+
+  </Target>
+
+  <Target Name="MoveAPI" AfterTargets="AfterPublish">
+    <Exec WorkingDirectory="$(OutDir)" Command="rmdir &quot;$(ProjectDir)$(PublishUrl)api&quot; /S /Q" />
+    <!-- note the /xd api (option) is needed to prevent a recursive move into api/api/* -->
+    <Exec WorkingDirectory="$(OutDir)" Command="robocopy /move &quot;$(ProjectDir)$(PublishUrl)\&quot; &quot;$(ProjectDir)$(PublishUrl)api&quot; /xd api /e /r:0 /w:0 || exit 0" />  
+  </Target>
+  
+  <Target Name="PublishAngular" AfterTargets="MoveAPI">
+    <!-- Ensure wwwroot exists inside the publish folder after deletion -->
+    <!--<Exec Command="if not exist &quot;$(ProjectDir)$(PublishUrl)wwwroot&quot; mkdir &quot;$(ProjectDir)$(PublishUrl)wwwroot&quot;" />-->
+    <Exec WorkingDirectory="$(ProjectDir)" Command="robocopy &quot;$(SpaRoot)\dist\tadpole-site.client\browser&quot; &quot;$(ProjectDir)$(PublishUrl)wwwroot&quot; /e /r:0 /w:0 || exit 0" />
+  </Target>
+  
+</Project>

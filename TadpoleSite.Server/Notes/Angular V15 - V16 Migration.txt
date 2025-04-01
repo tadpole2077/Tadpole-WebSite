@@ -1,0 +1,64 @@
+﻿WHEN: 17/10/2024
+Angular Version: 16.2.16
+
+Links:
+https://update.angular.io/?l=2&v=14.0-15.0
+https://angular.io/guide/versions
+
+Dependencies Options selected:
+- Angular Material
+- Windows
+
+
+Node:
+	V16 compatible with node.js V16 and V18
+	* (2024-10 acive) Node V16.20.2				- (cmd)nvm list  ,  node -v
+
+
+Compatible Packages
+	Typescript V4.9.3 or later					- V4.9.4 version used during upgrade.
+	Zone.js V0.13.x or later					- was V0.11.6 ,  update @angular/core@16 @angular/cli@16 >> updated zone.js to V0.13.3					
+
+Prerequisite:
+	Remove old V15 SSR generated files and packages (see dev doc).  This cleans out system, allows express-engine to auto geneate new clean SSR fileset 
+
+Actions:
+	npm i typescript@4.9.4 --save-dev
+
+	npm i zone.js@0.13.03
+
+	ng update @angular/core@16 @angular/cli@16 @angular-eslint/schematics@16	: ran within ClientApp dir.
+	    Warning: Package "@nguniversal/builders" has an incompatible peer dependency to "@angular-devkit/build-angular" (requires "^15.0.0", would install "16.2.16").
+		Override: ng update @angular/core@16 @angular/cli@16 @angular-eslint/schematics@16 --force
+		Followup:  resolve later.
+		ESLint:  Installs latest version of eslint package set compatible with V16.x of Angular.
+
+	ng update @angular/material@16	
+
+	npm i @ng-bootstrap/ng-bootstrap@15.1.2   (prior version @14.2.0) : https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap/v/15.1.2
+		- existing bootstrap@5.2.3 is valid for V16 Angular
+	
+	rxjs : prior V15 version compatible 7.8.1  - no change : https://angular.dev/reference/versions
+
+	npm i @swimlane/ngx-charts@20.5.0	:  https://swimlane.gitbook.io/ngx-charts/changelog , https://www.npmjs.com/package/@swimlane/ngx-charts [ >1 year old, min support currently :/ ]
+
+
+
+===============================
+Potential Code Changes:
+1) The Event union no longer contains RouterEvent, which means that if you're using the Event type you may have to change the type definition from (e: Event) to (e: Event|RouterEvent)
+
+	Used in Modules:  
+		owner-data.component.ts
+
+2) In addition to NavigationEnd the routerEvent property now also accepts type NavigationSkipped
+
+
+
+================================
+
+
+
+
+
+==================================

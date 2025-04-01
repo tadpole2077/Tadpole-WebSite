@@ -1,0 +1,63 @@
+﻿WHEN: 10/02/2025
+Angular Version: 17.3.11
+
+Links:
+https://update.angular.io/?l=2&v=14.0-15.0
+https://v17.angular.io/guide/versions
+
+
+Dependencies Options selected:
+- Angular Material
+- Windows
+
+Change CMD Directory:  ..\clientApp
+
+Node:
+	V17 compatible with node.js ^18.13.0 || ^20.9.0			- Using Node V18.20.3
+	- (cmd)nvm list  ,  node -v
+
+
+Compatible Packages
+	Typescript >=5.2.0 <5.5.0					- 4.9.4 version installed pre-upgrade.	 Upgrade required  5.4.5  [automatically upgraded with core & cli V17]
+												https://www.npmjs.com/package/typescript/v/5.4.5
+	RXJS ^6.5.3 || ^7.4.0						- 7.5.5 version installed pre-upgrade.   No upgrade required.
+	Zone.js V0.14.x or later					- 0.13.3 version installed pre-upgrade.	 Upgrade required 0.14.10 -  node zone is auto upgraded with angular/core@17
+												https://www.npmjs.com/package/zone.js/v/0.14.10
+	
+	npm install	|| npm install -force			If Node experiences dl problems and wipes the node dir - reinstall all requierd packages.
+
+Actions:
+	ng update @angular/core@17 @angular/cli@17 @angular-eslint/schematics@17 
+	*** Note this includes the eslint upgrade as per V17.0.0 guidence https://github.com/angular-eslint/angular-eslint/releases?page=2
+
+	ng update @angular/material@17
+
+	npm i @ng-bootstrap/ng-bootstrap@16.0.0		- Prior version ^15.1.2  ,   based on bootstrap V5 https://getbootstrap.com/ , no longer dependent on jQuery lib.
+												- Compatible packages https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap/v/17.0.1?activeTab=readme
+
+
+Update Notes:
+- Angular v17 introduces a new control flow syntax that uses the @ and {} characters, V17 update automaticaly replacing prior syntax
+
+
+Compile Errors:
+- None
+
+
+VS & .NET Upgrade:
+1)  2025_02_10 upgrade to .NET V9,  and related Nuget packages upgraded 
+
+2)  Download .NET 9 on Dev machine:  SDK 9.0.100 > Window x64 Installer 
+	https://dotnet.microsoft.com/en-us/download/dotnet/9.0
+	https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-9.0.100-windows-x64-installer
+
+	Requires upgrade to : Visual Studio 2022 (v17.12)
+
+3) Change Project Settings >> Target Framework >> .NET 9
+
+.NET V9 Upgrade Issues:
+>> Error (active)	CS0246	The type or namespace name 'ErrorModel' could not be found (are you missing a using directive or an assembly reference?)	
+	D:\0_Development\2_Applications\GitHub\<app>\obj\Debug\net9.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Error_cshtml.g.cs	102		
+	Cause/Solution : 
+		renamed namespaces
+		Missing one file.  Root/Pages/_ViewImports.cshtml

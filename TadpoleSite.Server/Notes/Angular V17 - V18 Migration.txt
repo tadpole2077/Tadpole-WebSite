@@ -1,0 +1,73 @@
+﻿WHEN: 26/02/2025
+Angular Version: 18.2.x
+
+Links:
+https://angular.dev/update-guide?v=17.0-18.0&l=1
+https://v18.angular.dev/reference/versions#actively-supported-versions
+
+
+Dependencies Options selected:
+- Angular Material
+- Windows
+
+Change CMD Directory:  ..\clientApp
+
+Node:
+	V18 compatible with node.js ^18.19.1 || ^20.11.1 || ^22.0.0		- No change required - current version v18.20.3
+	- (cmd)nvm list  ,  node -v
+
+
+Compatible Packages
+	Typescript >=5.4.0 <5.6.0					- 5.4.5 version installed pre-upgrade.	 No Upgrade required (Optional)
+												https://www.npmjs.com/package/typescript/v/5.4.5
+	RXJS ^6.5.3 || ^7.4.0						- 7.5.5 version installed pre-upgrade.   No upgrade required.
+	Zone.js V0.14.x or later					- node zone is auto upgraded with angular/core@18
+												https://www.npmjs.com/package/zone.js/v/0.14.10
+	
+	npm install	|| npm install -force			If Node experiences dl problems and wipes the node dir - reinstall all requierd packages.
+
+Actions:
+	ng update @angular/core@18 @angular/cli@18 @angular-eslint/schematics@18
+			*** Note this includes the eslint upgrade as per V18.0.0 guidence https://github.com/angular-eslint/angular-eslint/releases?page=2
+
+
+	ng update @angular/material@18
+
+	npm i @ng-bootstrap/ng-bootstrap@17.0.1		- Prior version 16.0.0  ,   based on bootstrap V5 https://getbootstrap.com/ , no longer dependent on jQuery lib.
+												- Compatible packages https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap/v/17.0.1?activeTab=readme
+
+	npm i web3@4.16.0							- last version of web3
+	
+
+Update Notes:
+- Angular v18 requests if you want to optionally migrate to application builder, see doc for details.
+
+- BootstrapV16 not compatible with Angular V18, issue shown when listing dependencies
+  CLI >> npm list --depth 2 
+
+
+
+Compile Errors:
+- None
+
+Runtime Errors - Warning:
+- Web3
+	Issue reported with Web3 V4.6
+	Likely related to :	web3-validator >> Package Dependency >> "zod": "^3.21.4"
+	As minified code contains many references to Zod function calls before this fault is identified.
+	https://github.com/colinhacks/zod
+	Latest Zod V3.24.2
+	Found zod issue at : https://github.com/colinhacks/zod/blob/47dbb2dbf3e611db08e84d6c13f66f19427c8172/src/types.ts#L666
+
+
+	ISSUE REPORTED:
+	● [DEBUG] Unicode property escapes in regular expressions are not available in the configured target environment ("chrome133.0", "edge131.0", "firefox128.0", "ios17.0", "safari17.0" + 5 overrides) [unsupported-regexp]
+
+    node_modules/web3/dist/web3.min.js:3426:17:
+      3426 │           y = /^(\p{Extended_Pictographic}|\p{Emoji_Component})+$/u,
+
+
+
+
+VS & .NET Upgrade:
+-

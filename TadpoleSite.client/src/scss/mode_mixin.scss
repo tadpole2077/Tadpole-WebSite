@@ -1,0 +1,43 @@
+//
+// Solution Mixin's
+//  Home - large icon buttons
+//  Link - all links thoughout components using animated underline on hover
+
+@mixin home($app-button-bg, $app-button-hover-bg, $app-button-color) {
+
+  .action {
+    background-color: $app-button-bg;
+    border: 1px solid rgba(0,0,0,.125);
+  }
+
+  .action:hover {
+    background-color: $app-button-hover-bg;
+  }
+
+  .action span {
+    color: $app-button-color;
+  }
+
+  .action:hover i, .action:hover span {
+    color: white;
+  }
+}
+
+
+@mixin link($app-link-color, $app-link-hover, $app-link-underscore) {
+  a, a span {
+    color: $app-link-color;
+  }
+
+  a.lineAnim:hover, a.lineAnim:hover span {
+    color: $app-link-hover;
+  }
+
+  .alertBell a span:hover {
+    color: $app-link-hover;
+  }
+  // underline animation
+  a.lineAnim::before {
+    background-color: $app-link-underscore;
+  }
+}

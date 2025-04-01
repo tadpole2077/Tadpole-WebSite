@@ -1,0 +1,45 @@
+
+.footerBlock {   
+  margin: 0px auto;
+  text-align: center;
+  border-top: 1px solid #4482b4;
+  text-align: center;
+  font-weight: 500;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.angularLogoContainer{
+  display:inline-block;
+  margin-right:10px;
+}
+.angularLogo{
+  width: 17rem;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.angularVersion{
+  position:absolute;  
+  margin-top: -20px;
+  margin-left: 255px;
+  font-weight: 500;
+}
+
+.dotnet{
+  height: 70px;
+}
+
+
+@media only screen and (max-width: 426px) {
+  .angularLogo{
+    width: 10rem;
+  }
+  .angularVersion{
+    margin-left: 148px;
+    font-weight: 400;
+  }
+
+  .dotnet{
+    height: 50px;
+  }
+}

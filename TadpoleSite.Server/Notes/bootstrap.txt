@@ -1,0 +1,27 @@
+﻿
+Process When Using BootStrap Controls
+============================================
+Related Packages:
+    "@ng-bootstrap/ng-bootstrap": "^17.0.1",
+    "bootstrap": "^5.2.3",
+
+Used For
+    Responsive design components
+    Used within Nav controls, and some other optional controls like dropdowns
+
+
+Angular.json
+    Add following to styles for "architect" >> "build" and "test"
+    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+
+Using bootstrap Also Requires:
+    Polyfill for "@angular/localize/init"  - warning shown on bundle build,  add to angular.json
+
+
+
+Bootstrap Issues
+=============================================
+Bootstrap overriding body styles - eg font family
+File: _reboot.scss
+Solution: Place src/styles.css after the bootstrap.min.css file within Angular.json  [specificity ranking change]

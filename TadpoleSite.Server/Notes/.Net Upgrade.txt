@@ -1,0 +1,23 @@
+﻿=====================================================================================
+VISUAL STUDIO UPGRADE
+Action: Upgrade from .Net V6 to .Net V8
+Steps:
+1) https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+Already Installed:
+- SDK 8.0.204 :  Needed to Build Apps and Run V8 .Net Apps (Included in V17.9.6 VS - latest as of 2/5/2024)
+
+On Server (Windows 2019 Standard) - already installed:
+- ASP.NET Core 7.0.2 - Shared Framework
+- MS .NET Runtime - 7.0.2 (x86)
+Change:
+- Recommended to installed "ASP.NET Core Runtime 8.0.4" >>Hosting Bundle
+  includes .Net Runtime and IIS Support.
+- Installed "Hosting Bundle" >> https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+- Restart of IIS required
+- Showing "MS ASP.NET Core 8.04" & "MS .NET Runtime - 8.0.4" : now installed.
+
+OS Compatibility List: https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md
+
+Steps to Upgrade V6 to V8
+https://devblogs.microsoft.com/dotnet/upgrade-assistant-now-in-visual-studio/
+- Right click on target project >> Upgrade >> Install upgrade Assistant
